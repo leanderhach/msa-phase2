@@ -1,30 +1,28 @@
 import React from 'react';
 import testData from './testData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 const currentLocation = "Auckland";
-
 const weatherData = testData.data.timelines[0].intervals;
 
-const currentWeatherCondition = weatherData[0].values.weatherCode
-
-const currentWeatherIcon = (): string => {
+const currentWeatherIcon = (): IconProp => {
     let weatherCondition = weatherData[0].values.weatherCode
-    let weatherIcon: string;
+    let weatherIcon: IconProp;
 
-    if(weatherCondition == 1000 || weatherCondition == 1100) {
+    if(weatherCondition === 1000 || weatherCondition === 1100) {
         weatherIcon = "sun";
     }
-    else if (weatherCondition == 1101 || weatherCondition == 1102) {
+    else if (weatherCondition === 1101 || weatherCondition === 1102) {
         weatherIcon = "cloud-sun";
     }
-    else if (weatherCondition == 1001) {
+    else if (weatherCondition === 1001) {
         weatherIcon = "cloud";
     }
-    else if (weatherCondition == 2000 || weatherCondition == 2001) {
+    else if (weatherCondition === 2000 || weatherCondition === 2001) {
         weatherIcon = "smog";
     }
-    else if (weatherCondition == 4000 || weatherCondition == 4001 || weatherCondition == 4200) {
+    else if (weatherCondition === 4000 || weatherCondition === 4001 || weatherCondition === 4200) {
         weatherIcon = "cloud-rain";
     }
     else if (weatherCondition > 5000 && weatherCondition < 6000) {
@@ -48,7 +46,7 @@ function CurrentConditions() {
                     </div>
                 </div>
             </div>
-            <FontAwesomeIcon icon={currentWeatherIcon}></FontAwesomeIcon>
+            <FontAwesomeIcon icon={currentWeatherIcon()}></FontAwesomeIcon>
         </div>
     );
 }
