@@ -1,0 +1,16 @@
+#degree-icon {
+    height:0.66rem;
+}
+
+#temperature {
+    margin-top:1rem;
+}
+
+#weather-icon {
+    height:6rem;
+}
+
+#condition-icon {
+    width:20%;
+    height:100%;
+}
