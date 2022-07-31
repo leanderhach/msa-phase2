@@ -14,3 +14,11 @@
     width:20%;
     height:100%;
 }
+
+.current-conditions {
+    margin-bottom: 2rem;
+}
+
+.current-conditions > .container:nth-child(2) {
+    margin:1rem 0 2rem 0;
+}

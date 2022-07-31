@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CurrentConditions from "./CurrentConditions";
-
+import DayOverview from './DayOverview';
+import WeekOverview from "./WeekOverview";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,6 +17,8 @@ function App() {
       </header>
       <main>
           <CurrentConditions></CurrentConditions>
+          <DayOverview></DayOverview>
+          <WeekOverview></WeekOverview>
       </main>
     </div>
   );

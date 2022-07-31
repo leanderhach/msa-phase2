@@ -19,8 +19,13 @@ header {
   flex-direction: row;
 }
 
+.container--space-between {
+  justify-content: space-between;
+}
+
 h1 {
   margin:0;
+  font-size:4rem;
 }
 
 .centered {
@@ -28,4 +33,14 @@ h1 {
   width:100%;
   align-content: center;
   justify-content: center;
+
+}
+
+.v-centered {
+  display:flex;
+  align-items: center;
+}
+
+svg.svg-inline--fa {
+  margin-right:0.5rem;
 }

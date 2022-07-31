@@ -1,67 +1,47 @@
 import React from 'react';
-import testData from './testData';
+import { hourlyData } from './testData';
 import './CurrentConditions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import Chip from '@mui/material/Chip';
+import weatherCodeToIcon from "./utils/weatherCodeToIcon";
+import convertTemperature from "./utils/ConvertTemperature";
 
-const currentLocation = "Times Square, New York";
-const weatherData = testData.data.timelines[0].intervals;
+const currentLocation = "Christchurch, New Zealand";
+const weatherData = hourlyData.data.timelines[0].intervals;
 const currentTemperature = weatherData[0].values.temperature;
-
-const currentWeatherIcon = (): IconProp => {
-    let weatherCondition = weatherData[0].values.weatherCode
-    let weatherIcon: IconProp;
-
-    if(weatherCondition === 1000 || weatherCondition === 1100) {
-        weatherIcon = "sun";
-    }
-    else if (weatherCondition === 1101 || weatherCondition === 1102) {
-        weatherIcon = "cloud-sun";
-    }
-    else if (weatherCondition === 1001) {
-        weatherIcon = "cloud";
-    }
-    else if (weatherCondition === 2000 || weatherCondition === 2001) {
-        weatherIcon = "smog";
-    }
-    else if (weatherCondition === 4000 || weatherCondition === 4001 || weatherCondition === 4200) {
-        weatherIcon = "cloud-rain";
-    }
-    else if (weatherCondition > 5000 && weatherCondition < 6000) {
-        weatherIcon = "snowflake";
-    } else {
-        weatherIcon = "sun";
-    }
-
-    return weatherIcon;
-};
-
-function convertTemperature(convertTo: string, value: number) {
-    if(convertTo === "celsius") {
-        return Math.round(((value - 32) / 1.8));
-    }
-
-    return Math.round(value);
-}
-
+const currentFeelsLike = weatherData[0].values.temperatureApparent;
+const weatherCode = weatherData[0].values.weatherCode;
 
 function CurrentConditions() {
     return (
         <div className="current-conditions">
-            <div className="container">
+            <div className="container v-centered">
                 <FontAwesomeIcon icon="location-dot"></FontAwesomeIcon>
                 {currentLocation}
             </div>
-            <div className="container">
+            <div className="container container--space-between v-centered">
                 <div className="condition-details">
                     <div className="container" id="temperature">
                         <h1 className="title">{convertTemperature('celsius', currentTemperature)}</h1>
                         <FontAwesomeIcon id="degree-icon" icon="circle-dot"></FontAwesomeIcon>
                     </div>
-                    <Chip label="Cloudy"/>
                 </div>
-                <FontAwesomeIcon id="condition-icon" icon={currentWeatherIcon()}></FontAwesomeIcon>
+                <FontAwesomeIcon id="condition-icon" icon={weatherCodeToIcon(weatherCode)}></FontAwesomeIcon>
+            </div>
+            <div className="container container--space-between">
+                <div className="container v-centered">
+                    <FontAwesomeIcon icon={"droplet"}></FontAwesomeIcon>
+                    {weatherData[0].values.humidity}%
+                </div>
+                <div className="container v-centered">
+                    <FontAwesomeIcon icon={"wind"}></FontAwesomeIcon>
+                    {weatherData[0].values.windSpeed} km/h
+                </div>
+                <div className="container v-centered">
+                    <FontAwesomeIcon icon={"umbrella"}></FontAwesomeIcon>
+                    {weatherData[0].values.precipitationProbability}%
+                </div>
             </div>
         </div>
     );
