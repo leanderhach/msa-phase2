@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import './CurrentConditions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Chip from '@mui/material/Chip';
 import weatherCodeToIcon from "./utils/weatherCodeToIcon";
 import convertTemperature from "./utils/ConvertTemperature";
-import useGlobalState, {dataPoint} from "./utils/State";
+import useGlobalState from "./utils/State";
 import {Stack} from "@mui/material";
 
 function CurrentConditions() {

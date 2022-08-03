@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/*eslint-disable react-hooks/exhaustive-deps*/
 import React, {useEffect} from 'react';
 import './App.css';
 import CurrentConditions from "./CurrentConditions";
@@ -7,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import {FetchWeather} from "./utils/APIHandler";
 import useGlobalState from "./utils/State";
-import {Backdrop, Button, CircularProgress, Stack, TextField} from "@mui/material";
+import {Backdrop, CircularProgress, Stack, TextField} from "@mui/material";
 import {cities} from './cities';
 
 

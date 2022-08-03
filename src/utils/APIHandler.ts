@@ -1,6 +1,4 @@
-import React from "react";
 import axios from "axios";
-import useGlobalState from "./State";
 
 export async function FetchWeather (location: string) {
 

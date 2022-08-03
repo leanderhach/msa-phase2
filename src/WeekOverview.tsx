@@ -1,3 +1,5 @@
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 import React, {useEffect} from "react";
 import {Stack} from "@mui/material";
 import useGlobalState from "./utils/State";
