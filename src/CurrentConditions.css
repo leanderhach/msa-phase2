@@ -2,10 +2,6 @@
     height:0.66rem;
 }
 
-#temperature {
-    margin-top:1rem;
-}
-
 #weather-icon {
     height:6rem;
 }
@@ -15,10 +11,7 @@
     height:100%;
 }
 
-.current-conditions {
-    margin-bottom: 2rem;
-}
-
-.current-conditions > .container:nth-child(2) {
-    margin:1rem 0 2rem 0;
+.fa-circle-dot.text {
+    font-size:0.4rem;
+    margin-left:0.2rem;
 }

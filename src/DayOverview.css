@@ -1,26 +1,11 @@
 .day-overview {
     display: inline-block;
-    overflow:scroll;
+    overflow-x:scroll;
     width:100%;
 }
 
-.overview {
-    display:flex;
-    flex-direction:row;
-}
-
-.overview__item {
-    min-width:60px;
-    padding:0 10px;
-    box-sizing: border-box;
-}
-
-#degree-icon {
-
-}
-
 #temperature-line {
-    width:888px;
+    width:1270px;
     height: 80px;
 }
 

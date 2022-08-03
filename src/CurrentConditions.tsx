@@ -1,48 +1,81 @@
-import React from 'react';
-import { hourlyData } from './testData';
+import React, {useEffect} from 'react';
 import './CurrentConditions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {IconProp} from "@fortawesome/fontawesome-svg-core";
 import Chip from '@mui/material/Chip';
 import weatherCodeToIcon from "./utils/weatherCodeToIcon";
 import convertTemperature from "./utils/ConvertTemperature";
-
-const currentLocation = "Christchurch, New Zealand";
-const weatherData = hourlyData.data.timelines[0].intervals;
-const currentTemperature = weatherData[0].values.temperature;
-const currentFeelsLike = weatherData[0].values.temperatureApparent;
-const weatherCode = weatherData[0].values.weatherCode;
+import useGlobalState, {dataPoint} from "./utils/State";
+import {Stack} from "@mui/material";
 
 function CurrentConditions() {
+
+    let [currentLocation] = useGlobalState('textLocation');
+    let [hourlyData] = useGlobalState('hourlyData');
+    let currentTime = new Date(new Date().setMinutes(0, 0, 0)).getTime();
+
+    let currentData = () => {
+        if(hourlyData) {
+            let data = hourlyData.find((item) => new Date(item.startTime).getTime() === currentTime);
+
+            if(data) {
+                return data;
+            }
+        }
+        return {
+            values: {
+                precipitationProbability: 0,
+                windSpeed: 0,
+                humidity: 0,
+                weatherCode: 0,
+                temperature: 0,
+            }
+        }
+    }
+
+    let formattedLocation = () => {
+        if(currentLocation) {
+            let formatted = currentLocation.split(',').slice(1);
+
+            return formatted.join(", ");
+        } else {
+            return ""
+        }
+    }
+
+    useEffect (()  => {
+        currentData();
+        formattedLocation();
+    })
+
     return (
         <div className="current-conditions">
-            <div className="container v-centered">
+            <Stack direction={"row"} justifyContent={"flex-start"} alignItems={"center"} mt={2} mb={4}>
                 <FontAwesomeIcon icon="location-dot"></FontAwesomeIcon>
-                {currentLocation}
-            </div>
-            <div className="container container--space-between v-centered">
+                <p className="text semi-bold">{formattedLocation()}</p>
+            </Stack>
+            <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <div className="condition-details">
-                    <div className="container" id="temperature">
-                        <h1 className="title">{convertTemperature('celsius', currentTemperature)}</h1>
+                    <Stack spacing={1} direction={"row"}>
+                        <h1 className="text light">{convertTemperature('celsius', currentData().values.temperature)}</h1>
                         <FontAwesomeIcon id="degree-icon" icon="circle-dot"></FontAwesomeIcon>
-                    </div>
+                    </Stack>
                 </div>
-                <FontAwesomeIcon id="condition-icon" icon={weatherCodeToIcon(weatherCode)}></FontAwesomeIcon>
-            </div>
-            <div className="container container--space-between">
-                <div className="container v-centered">
+                <FontAwesomeIcon id="condition-icon" icon={weatherCodeToIcon(currentData().values.weatherCode)}></FontAwesomeIcon>
+            </Stack>
+            <Stack direction={"row"} justifyContent={"space-between"} mt={4} mb={4}>
+                <Stack direction={"row"} spacing={0} alignItems={"center"}>
                     <FontAwesomeIcon icon={"droplet"}></FontAwesomeIcon>
-                    {weatherData[0].values.humidity}%
-                </div>
-                <div className="container v-centered">
+                    <p className="text light">{currentData().values.humidity}%</p>
+                </Stack>
+                <Stack direction={"row"} spacing={0} alignItems={"center"}>
                     <FontAwesomeIcon icon={"wind"}></FontAwesomeIcon>
-                    {weatherData[0].values.windSpeed} km/h
-                </div>
-                <div className="container v-centered">
+                    <p className="text light">{currentData()!.values.windSpeed} km/h</p>
+                </Stack>
+                <Stack direction={"row"} spacing={0} alignItems={"center"}>
                     <FontAwesomeIcon icon={"umbrella"}></FontAwesomeIcon>
-                    {weatherData[0].values.precipitationProbability}%
-                </div>
-            </div>
+                    <p className="text light">{currentData()!.values.precipitationProbability}%</p>
+                </Stack>
+            </Stack>
         </div>
     );
 }
