@@ -8,7 +8,7 @@ import {Stack} from "@mui/material";
 
 function CurrentConditions() {
 
-    let [currentLocation] = useGlobalState('textLocation');
+    let [currentLocation] = useGlobalState('location');
     let [hourlyData] = useGlobalState('hourlyData');
     let currentTime = new Date(new Date().setMinutes(0, 0, 0)).getTime();
 
@@ -32,7 +32,7 @@ function CurrentConditions() {
     }
 
     let formattedLocation = () => {
-        return currentLocation;
+        return `${currentLocation.requested_location}`;
     }
 
     useEffect (()  => {

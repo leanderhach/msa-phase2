@@ -15,10 +15,22 @@ export type dataPoint = {
     }
 }
 
+type location = {
+    requested_location: string,
+    longitude: number,
+    latitude: number,
+    datetime: string,
+    timezone_name: string,
+    timezone_location: string,
+    timezone_abbreviation: string,
+    gmt_offset: string,
+    is_dst: boolean
+}
+
 export interface state {
     hourlyData: Array<dataPoint>,
     dailyData: Array<dataPoint>,
-    textLocation: string,
+    location: location,
 }
 const simpleState: state = {
     hourlyData: [
@@ -51,7 +63,17 @@ const simpleState: state = {
             }
         }
     ],
-    textLocation: ""
+    location: {
+        requested_location: "",
+        longitude: 0,
+        latitude: 0,
+        datetime: "",
+        timezone_name: "",
+        timezone_location: "",
+        timezone_abbreviation: "",
+        gmt_offset: "",
+        is_dst: true
+    }
 }
 
 const { useGlobalState } = createGlobalState(simpleState);

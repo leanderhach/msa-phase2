@@ -18,7 +18,7 @@ library.add(fas);
 function App() {
     const [hourlyData, setHourlyData] = useGlobalState('hourlyData');
     const [dailyData, setDailyData] = useGlobalState('dailyData');
-    const [textLocation, setTextLocation] = useGlobalState('textLocation');
+    const [location, setLocation] = useGlobalState('location');
 
     const [searchValue, setSearchValue] = React.useState("");
     const [isFocused, setIsFocused] = React.useState(false);
@@ -37,7 +37,7 @@ function App() {
         setIsFocused(!isFocused);
     }
 
-    async function setCity(lat: number, lng: number) {
+    async function setCity(lat: number, lng: number, city: string, country: string) {
 
         console.log("loading city");
         let coordinates = `${lat},${lng}`;
@@ -45,10 +45,13 @@ function App() {
         setLoadState("loadingCity");
 
         let { weather, location } = await FetchWeather(coordinates);
+
+        location.data.requested_location = `${city}, ${country}`;
+
         // send data from axios to the state
         setHourlyData(v => v = weather.data.data.timelines[1].intervals);
         setDailyData(v => v = weather.data.data.timelines[0].intervals);
-        setTextLocation(v => v = `${location.data.city}, ${location.data.countryName}`);
+        setLocation(v => v = location.data);
 
         setLoadState("loaded");
     }
@@ -59,7 +62,7 @@ function App() {
             city.country.toLowerCase().includes(searchValue.toLowerCase()))
         .map((city, index) =>
             <div key={index} className={"clickable text semi-bold"} onClick={() => {
-                return setCity(city.lat, city.lng);
+                return setCity(city.lat, city.lng, city.city, city.country);
             }}>{city.city}</div>
         );
 

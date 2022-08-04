@@ -23,13 +23,15 @@ points = [];
 function DayOverview () {
 
     const [hourlyData] = useGlobalState("hourlyData");
+    const [location] = useGlobalState("location");
 
     const dayDataPoints = (): dataPoint[] => {
         return hourlyData.filter(
-            item => new Date(item.startTime).toLocaleString().split(',')[0] ===
-                new Date().toLocaleString().split(',')[0]
+            item => new Date(item.startTime).toLocaleString('en-US', {timeZone: location.timezone_location}).split(',')[0] ===
+                new Date().toLocaleString('en-US', {timeZone: location.timezone_location}).split(',')[0]
         )
     }
+    
 
     const createDayBreakdown = () => {
         const itemWidth = 60;
@@ -39,9 +41,8 @@ function DayOverview () {
 
         // @ts-ignore
         for(const [index, day] of dayDataPoints().entries()) {
-
             let time = new Date(day.startTime)
-                .toLocaleString('en-US', { hour: 'numeric', hour12: true })
+                .toLocaleString(`en-US`, { hour: 'numeric', hour12: true, timeZone: location.timezone_location})
                 .replace(" ", '')
                 .toLowerCase();
 

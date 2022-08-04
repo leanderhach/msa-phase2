@@ -29,14 +29,14 @@ export async function FetchWeather (location: string) {
 
     const reverseLocation = await axios({
         method: "get",
-        url: " https://api.bigdatacloud.net/data/reverse-geocode",
+        url: "https://timezone.abstractapi.com/v1/current_time",
         params: {
-            key: "bdc_33910fe7927d4db88c1e8ec596c83c0e",
-            latitude: location.split(",")[0],
-            longitude: location.split(",")[1],
-            limit: 3
+            api_key: "b0207e6d5ff748888372edf9adfa92d6",
+            location: location
         }
     })
+
+
 
     return {
         weather: data,
