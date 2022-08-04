@@ -48,7 +48,7 @@ function App() {
         // send data from axios to the state
         setHourlyData(v => v = weather.data.data.timelines[1].intervals);
         setDailyData(v => v = weather.data.data.timelines[0].intervals);
-        setTextLocation(v => v = location.data.data[0].label);
+        setTextLocation(v => v = `${location.data.city}, ${location.data.countryName}`);
 
         setLoadState("loaded");
     }

@@ -32,13 +32,7 @@ function CurrentConditions() {
     }
 
     let formattedLocation = () => {
-        if(currentLocation) {
-            let formatted = currentLocation.split(',').slice(1);
-
-            return formatted.join(", ");
-        } else {
-            return ""
-        }
+        return currentLocation;
     }
 
     useEffect (()  => {

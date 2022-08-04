@@ -14,8 +14,6 @@ export async function FetchWeather (location: string) {
     params.append("fields", "weatherCode");
     params.append("fields", "windSpeed");
     params.append("fields", "humidity");
-    params.append("fields", "windDirection");
-    params.append("fields", "temperatureApparent");
     params.append("fields", "temperature");
     params.append("fields", "precipitationProbability");
 
@@ -31,10 +29,11 @@ export async function FetchWeather (location: string) {
 
     const reverseLocation = await axios({
         method: "get",
-        url: "http://api.positionstack.com/v1/reverse",
+        url: " https://api.bigdatacloud.net/data/reverse-geocode",
         params: {
-            access_key: "c4ca181c413808163e69b356ddc5415f",
-            query: location,
+            key: "bdc_33910fe7927d4db88c1e8ec596c83c0e",
+            latitude: location.split(",")[0],
+            longitude: location.split(",")[1],
             limit: 3
         }
     })
