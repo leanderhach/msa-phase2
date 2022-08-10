@@ -130897,45 +130897,6 @@ export const cities = [
     "id": 1064512651
   },
   {
-    "city": "Tigoa",
-    "city_ascii": "Tigoa",
-    "lat": -11.5531,
-    "lng": 160.0647,
-    "country": "Solomon Islands",
-    "iso2": "SB",
-    "iso3": "SLB",
-    "admin_name": "Rennell and Bellona",
-    "capital": "admin",
-    "population": "",
-    "id": 1090423471
-  },
-  {
-    "city": "Žagubica",
-    "city_ascii": "Zagubica",
-    "lat": 44.1979,
-    "lng": 21.7902,
-    "country": "Serbia",
-    "iso2": "RS",
-    "iso3": "SRB",
-    "admin_name": "Žagubica",
-    "capital": "admin",
-    "population": "",
-    "id": 1688849472
-  },
-  {
-    "city": "Sandur",
-    "city_ascii": "Sandur",
-    "lat": 61.8344,
-    "lng": -6.8171,
-    "country": "Faroe Islands",
-    "iso2": "FO",
-    "iso3": "FRO",
-    "admin_name": "",
-    "capital": "admin",
-    "population": "",
-    "id": 1234438421
-  },
-  {
     "city": "El Fula",
     "city_ascii": "El Fula",
     "lat": 11.712,
